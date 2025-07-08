@@ -1,0 +1,196 @@
+[
+    {
+        "id": "TI-SNLA079D",
+        "title": "AN-1469 Layout Guidelines for 10/100/1000 Mbps Ethernet",
+        "url": "https://www.ti.com/lit/an/snla079d/snla079d.pdf",
+        "keywords": [
+            "ethernet",
+            "layout",
+            "pcb",
+            "1000base-t",
+            "phy",
+            "magnetics",
+            "lan",
+            "emi",
+            "трассировка"
+        ],
+        "source": "Local DB"
+    },
+    {
+        "id": "ADI-AN-1024",
+        "title": "Powering a High Speed ADC: A System-Level Approach",
+        "url": "https://www.analog.com/media/en/technical-documentation/application-notes/AN-1024.pdf",
+        "keywords": [
+            "adc",
+            "power",
+            "ldo",
+            "supply",
+            "decoupling",
+            "noise",
+            "psrr",
+            "питание",
+            "ацп",
+            "шум"
+        ],
+        "source": "Local DB"
+    },
+    {
+        "id": "INF-AN-2012-09",
+        "title": "General Layout Guidelines for SMPS",
+        "url": "https://www.infineon.com/dgdl/Infineon-AN-2012-09-v01_00-EN.pdf?fileId=db3a30433724325c013725df094e0573",
+        "keywords": [
+            "smps",
+            "dcdc",
+            "layout",
+            "pcb",
+            "power",
+            "switching",
+            "emi",
+            "hot loop",
+            "импульсный",
+            "трассировка",
+            "петля"
+        ],
+        "source": "Local DB"
+    },
+    {
+        "id": "SITE:TI",
+        "title": "Slaa921",
+        "url": "https://www.ti.com/lit/an/slaa921/slaa921.pdf",
+        "keywords": [
+            "layout",
+            "i2c",
+            "slaa921"
+        ],
+        "source": "Web (ti.com)"
+    },
+    {
+        "id": "INF",
+        "title": "Infineon Cyusb330X Cyusb331X Cyusb332X Hx3 Usb 3.0 Hub Datasheet V21 00 En?Fileid=8Ac78C8C7D0D8Da4017D0Ecb53F644B8",
+        "url": "https://www.infineon.com/dgdl/Infineon-CYUSB330x_CYUSB331x_CYUSB332x_HX3_USB_3.0_Hub-DataSheet-v21_00-EN.pdf?fileId=8ac78c8c7d0d8da4017d0ecb53f644b8",
+        "keywords": [
+            "00",
+            "infineon",
+            "en?fileid=8ac78c8c7d0d8da4017d0ecb53f644b8",
+            "cyusb332x",
+            "usb",
+            "cyusb330x",
+            "v21",
+            "usb3.0",
+            "hub",
+            "layout",
+            "3.0",
+            "cyusb331x",
+            "hx3",
+            "datasheet"
+        ],
+        "source": "Web (infineon.com)"
+    },
+    {
+        "id": "INF",
+        "title": "Infineon An91378 Hx3 Hardware Design Guidelines And Schematic Checklist Applicationnotes V03 00 En?Fileid=8Ac78C8C7Cdc391C017D073C6Ed2607C",
+        "url": "https://www.infineon.com/dgdl/Infineon-AN91378_HX3_Hardware_Design_Guidelines_and_Schematic_Checklist-ApplicationNotes-v03_00-EN.pdf?fileId=8ac78c8c7cdc391c017d073c6ed2607c",
+        "keywords": [
+            "00",
+            "an91378",
+            "infineon",
+            "guidelines",
+            "checklist",
+            "hx3",
+            "applicationnotes",
+            "schematic",
+            "and",
+            "usb3.0",
+            "design",
+            "layout",
+            "hardware",
+            "v03",
+            "en?fileid=8ac78c8c7cdc391c017d073c6ed2607c"
+        ],
+        "source": "Web (infineon.com)"
+    },
+    {
+        "id": "ST",
+        "title": "An5122 Stm32Mp1 Series Ddr Memory Routing Guidelines Stmicroelectronics",
+        "url": "https://www.st.com/resource/en/application_note/an5122-stm32mp1-series-ddr-memory-routing-guidelines-stmicroelectronics.pdf",
+        "keywords": [
+            "guidelines",
+            "ddr3",
+            "ddr",
+            "series",
+            "routing",
+            "an5122",
+            "stmicroelectronics",
+            "stm32mp1",
+            "layout",
+            "memory"
+        ],
+        "source": "Web (st.com)"
+    },
+    {
+        "id": "Unknown",
+        "title": "Search?Num=12",
+        "url": "https://www.google.com/search?num=12",
+        "keywords": [
+            "poe++",
+            "layout",
+            "search?num=12"
+        ],
+        "source": "Web (web)"
+    },
+    {
+        "id": "TI",
+        "title": "Slyt477",
+        "url": "https://www.ti.com/lit/an/slyt477/slyt477.pdf",
+        "keywords": [
+            "slyt477",
+            "poe++",
+            "layout"
+        ],
+        "source": "Web (ti.com)"
+    },
+    {
+        "id": "INF",
+        "title": "Infineon An50987 Getting Started With I2C In Psoc 1 Applicationnotes V07 00 En?Fileid=8Ac78C8C7Cdc391C017D0729Ffb54F1A",
+        "url": "https://www.infineon.com/dgdl/Infineon-AN50987_Getting_Started_with_I2C_in_PSoC_1-ApplicationNotes-v07_00-EN.pdf?fileId=8ac78c8c7cdc391c017d0729ffb54f1a",
+        "keywords": [
+            "00",
+            "an50987",
+            "infineon",
+            "with",
+            "1",
+            "applicationnotes",
+            "getting",
+            "i2c",
+            "started",
+            "v07",
+            "layout",
+            "psoc",
+            "en?fileid=8ac78c8c7cdc391c017d0729ffb54f1a",
+            "in"
+        ],
+        "source": "Web (infineon.com)"
+    },
+    {
+        "id": "INF",
+        "title": "Infineon An97119 Ez Usb Gx3 Hardware Design Guideliness Applicationnotes V04 00 En?Fileid=8Ac78C8C7Cdc391C017D07411C5B6438",
+        "url": "https://www.infineon.com/dgdl/Infineon-AN97119_EZ-USB_GX3_Hardware_Design_Guideliness-ApplicationNotes-v04_00-EN.pdf?fileId=8ac78c8c7cdc391c017d07411c5b6438",
+        "keywords": [
+            "00",
+            "infineon",
+            "guideliness",
+            "en?fileid=8ac78c8c7cdc391c017d07411c5b6438",
+            "v04",
+            "usb",
+            "ez",
+            "applicationnotes",
+            "gx3",
+            "design",
+            "layout",
+            "hardware",
+            "an97119",
+            "ethernet"
+        ],
+        "source": "Web (infineon.com)"
+    }
+]
