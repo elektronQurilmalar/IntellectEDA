@@ -192,5 +192,47 @@
             "ethernet"
         ],
         "source": "Web (infineon.com)"
+    },
+    {
+        "id": "Unknown",
+        "title": "Audacity2.3.0.0“lame_enc.dll”缺失解决办法 - 百度经验",
+        "url": "https://jingyan.baidu.com/article/a501d80c5cb66aec630f5ea7.html",
+        "keywords": [
+            "",
+            "layout",
+            "audacity2.3.0.0“lame_enc.dll”缺失解决办法",
+            "百度经验",
+            "i2c"
+        ],
+        "source": "Web (web)"
+    },
+    {
+        "id": "Unknown",
+        "title": "Kontakt – Okręgowa Komisja Egzaminacyjna we Wrocławiu",
+        "url": "https://oke.wroc.pl/kontakt/",
+        "keywords": [
+            "–",
+            "egzaminacyjna",
+            "okręgowa",
+            "layout",
+            "kontakt",
+            "komisja",
+            "we",
+            "wrocławiu",
+            "i2c"
+        ],
+        "source": "Web (web)"
+    },
+    {
+        "id": "Unknown",
+        "title": "SPI收发数据，高低位字节顺序！-CSDN社区",
+        "url": "https://bbs.csdn.net/topics/310263292",
+        "keywords": [
+            "layout",
+            "spi收发数据，高低位字节顺序！",
+            "csdn社区",
+            "spi"
+        ],
+        "source": "Web (web)"
     }
 ]
