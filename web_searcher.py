@@ -1,105 +1,100 @@
 # web_searcher.py
-from ddgs import DDGS
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
 import time
-import random
 
-# Расширенный список источников оставлен без изменений
-SEARCH_SITES = [
-    "site:ti.com/lit/an",
-    "site:analog.com/en/technical-documentation/application-notes",
-    "site:st.com/resource/en/application_note",
-    "site:infineon.com/dgdl",
-    "site:nxp.com/docs/en/application-note",
-    "site:ww1.microchip.com/downloads/en/AppNotes/",
-    "site:renesas.com/us/en/document/apn/",
-    "site:onsemi.com/pub/Collateral/",
-    "site:maximintegrated.com/en/design/technical-documents/app-notes/",
-    "site:vishay.com/docs/",
-    "site:rohm.com/documents/en/application-notes"
-]
+# Import keys from our new config file
+try:
+    from config import API_KEY, CSE_ID
+except ImportError:
+    print("ERROR: config.py not found or API_KEY/CSE_ID not set.")
+    print("Please create config.py and add your Google API Key and Custom Search Engine ID.")
+    API_KEY = None
+    CSE_ID = None
+
+# Vendor map remains useful for identifying the source.
+VENDOR_MAP = {
+    "ti.com": "TI",
+    "analog.com": "ADI",
+    "st.com": "ST",
+    "infineon.com": "INF",
+    "nxp.com": "NXP",
+    "microchip.com": "Microchip",
+    "renesas.com": "Renesas",
+    "onsemi.com": "Onsemi",
+    "maximintegrated.com": "Maxim",
+    "vishay.com": "Vishay",
+    "rohm.com": "ROHM",
+    "silabs.com": "SiLabs",
+    "monolithicpower.com": "MPS"
+}
 
 
-def search_web_for_notes(query: str, num_results_total: int = 20):
+def search_web_for_notes(query: str, num_results_total: int = 10):
     """
-    Ищет App Notes, используя полную имитацию браузера и человеческие паузы,
-    чтобы гарантированно обойти мягкие блокировки.
+    Searches for documents using the Google Custom Search API for high-quality, reliable results.
     """
+    if not API_KEY or not CSE_ID or "YOUR_" in API_KEY:
+        print("Google API keys are not configured. Web search is disabled.")
+        # Yield an error message to display in the GUI
+        yield {
+            "id": "ERROR",
+            "title": "Google API Key or CSE ID is not configured in config.py",
+            "url": "",
+            "source": "Configuration"
+        }
+        return
+
+    # The Google API returns results in pages of 10.
+    # We will make requests until we have enough results.
     collected_urls = set()
-    num_per_site = 3
 
-    # 1. МАСКИРОВКА: Представляемся обычным браузером. Это ключевое изменение.
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.5',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'DNT': '1',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1',
-        'Sec-Fetch-Dest': 'document',
-        'Sec-Fetch-Mode': 'navigate',
-        'Sec-Fetch-Site': 'none',
-        'Sec-Fetch-User': '?1',
-    }
+    try:
+        # Build the service object for interacting with the API
+        service = build("customsearch", "v1", developerKey=API_KEY)
 
-    # Применяем заголовки при создании объекта
-    with DDGS(headers=headers) as ddgs:
-        random.shuffle(SEARCH_SITES)
-
-        for site_filter in SEARCH_SITES:
+        # The API allows a max of 10 results per request. We may need to make multiple requests.
+        # The 'start' parameter controls pagination (1, 11, 21, etc.).
+        for i in range(0, 20, 10):  # Let's make a max of 2 requests (20 results)
             if len(collected_urls) >= num_results_total:
-                print(f"Достигнут лимит в {num_results_total} уникальных результатов. Завершаю поиск.")
                 break
 
-            try:
-                target_domain = site_filter.split('/')[0].replace('site:', '')
-                full_query = f'"{query}" filetype:pdf {site_filter}'
-                print(f"Ищу на DuckDuckGo (Цель: {target_domain})...")
+            print(f"Requesting results {i + 1}-{i + 10} from Google...")
 
-                search_results = ddgs.text(
-                    keywords=full_query,
-                    max_results=num_per_site * 2
-                )
+            # The 'fileType' parameter is a powerful and reliable filter.
+            res = service.cse().list(
+                q=query,
+                cx=CSE_ID,
+                fileType='pdf',
+                num=10,  # Request 10 items
+                start=i + 1
+            ).execute()
 
-                if not search_results:
-                    print("-> Ничего не найдено.")
-                    # Даже после неудачного поиска делаем паузу, чтобы не частить
-                    time.sleep(random.uniform(1.0, 2.0))
+            # The API returns an empty 'items' key if there are no results.
+            if 'items' not in res:
+                print("-> No more results from Google.")
+                break
+
+            for item in res['items']:
+                url = item['link']
+
+                # Basic sanity checks
+                if not url or url in collected_urls:
                     continue
 
-                site_results_count = 0
-                for r in search_results:
-                    url = r['href']
-
-                    if target_domain not in url or url in collected_urls:
-                        continue
+                try:
+                    domain = url.split('/')[2].replace('www.', '')
 
                     vendor = "Unknown"
-                    source_domain = target_domain
-                    if "ti.com" in url:
-                        vendor = "TI"
-                    elif "analog.com" in url:
-                        vendor = "ADI"
-                    elif "st.com" in url:
-                        vendor = "ST"
-                    elif "infineon.com" in url:
-                        vendor = "INF"
-                    elif "nxp.com" in url:
-                        vendor = "NXP"
-                    elif "microchip.com" in url:
-                        vendor = "Microchip"
-                    elif "renesas.com" in url:
-                        vendor = "Renesas"
-                    elif "onsemi.com" in url:
-                        vendor = "Onsemi"
-                    elif "maximintegrated.com" in url:
-                        vendor = "Maxim"
-                    elif "vishay.com" in url:
-                        vendor = "Vishay"
-                    elif "rohm.com" in url:
-                        vendor = "ROHM"
+                    source_domain = domain
+                    for domain_key, vendor_name in VENDOR_MAP.items():
+                        if domain_key in domain:
+                            vendor = vendor_name
+                            source_domain = domain_key
+                            break
 
-                    title = r.get('title', url.split('/')[-1].replace('.pdf', ''))
+                    # The title from Google is generally much cleaner.
+                    title = item.get('title', 'No Title')
 
                     yield {
                         "id": vendor,
@@ -108,17 +103,29 @@ def search_web_for_notes(query: str, num_results_total: int = 20):
                         "source": f"Web ({source_domain})"
                     }
                     collected_urls.add(url)
-                    site_results_count += 1
 
-                    if site_results_count >= num_per_site or len(collected_urls) >= num_results_total:
+                    if len(collected_urls) >= num_results_total:
                         break
 
-                # 2. ТЕРПЕНИЕ: Значительно увеличиваем паузу между запросами.
-                sleep_duration = random.uniform(2.0, 4.0)
-                print(f"-> Пауза {sleep_duration:.1f} сек...")
-                time.sleep(sleep_duration)
+                except IndexError:
+                    continue  # Skip malformed URLs
 
-            except Exception as e:
-                print(f"Произошла непредвиденная ошибка при поиске на {target_domain}: {e}")
-                time.sleep(5)  # В случае любой ошибки делаем долгую паузу
-                continue
+            # The free tier has a limit of 100 queries per day. A small delay is polite.
+            time.sleep(0.5)
+
+    except HttpError as e:
+        print(f"An HTTP error {e.resp.status} occurred: {e.content}")
+        yield {
+            "id": "ERROR",
+            "title": f"Google API Error: {e.resp.status}",
+            "url": "",
+            "source": "API Error"
+        }
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        yield {
+            "id": "ERROR",
+            "title": f"An unexpected error occurred: {e}",
+            "url": "",
+            "source": "App Error"
+        }

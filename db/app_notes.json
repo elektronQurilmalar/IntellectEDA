@@ -234,5 +234,17 @@
             "spi"
         ],
         "source": "Web (web)"
+    },
+    {
+        "id": "TI",
+        "title": "DP83848 MAU Schematics",
+        "url": "https://www.ti.com/lit/pdf/snlr022",
+        "keywords": [
+            "mau",
+            "dp83848",
+            "schematics",
+            "layout"
+        ],
+        "source": "Web (ti.com)"
     }
 ]
