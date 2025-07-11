@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de70c75f-74bd-4a7f-ae63-8b04c8271a63" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/knowledge_base_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/knowledge_base_handler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_searcher.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_searcher.py" afterDir="false" />
-    </list>
+    <list default="true" id="de70c75f-74bd-4a7f-ae63-8b04c8271a63" name="Changes" comment="Web search modernised" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,12 +111,29 @@
       <option name="project" value="LOCAL" />
       <updated>1752045758720</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Web search modernised">
+      <option name="closed" value="true" />
+      <created>1752263945909</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1752263945909</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Web search modernised">
+      <option name="closed" value="true" />
+      <created>1752263954375</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1752263954375</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="asd" />
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Web search modernised" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web search modernised" />
   </component>
 </project>
