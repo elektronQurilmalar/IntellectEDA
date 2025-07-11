@@ -1,9 +1,15 @@
 # IntellectEDA
+
 Dastruriy ta'minot internetdan elektron komponent yoki muayyan interfeysga oid hujjatlarni topadi. Bu dastur elektroniklar uchun juda foydali.
+
 Программа для поиска application note для компонента или интерфейса. Больше подходит для инженера-схемотехника.
+
 The programm finds datasheetsб refer to components or interfaces. More suitable for a electronics engineers. 
+
 <img width="997" height="672" alt="image" src="https://github.com/user-attachments/assets/3be28522-bacb-40da-9fad-9f9d6e7918b7" />
+
 <img width="992" height="676" alt="image" src="https://github.com/user-attachments/assets/c991b4d4-23ac-48af-87d6-dcb1f2c305e3" />
+
 <img width="995" height="672" alt="image" src="https://github.com/user-attachments/assets/0163992d-7cd3-4850-aa09-3b9133040a89" />
 
 DIQQAT!!!!!
