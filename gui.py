@@ -16,7 +16,7 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        self.title("IntellectuEDA - Самообучающийся Поисковик")
+        self.title("IntellectEDA - Technical Document Finder")
         self.geometry("1000x650")
 
         self.db = load_db()
@@ -36,7 +36,7 @@ class App(ctk.CTk):
             if self.winfo_exists():
                 self.after(0, func)
         except Exception:
-            print("Окно было закрыто, обновление GUI отменено.")
+            print("Window was closed.")
 
     def _create_widgets(self):
         # --- Фрейм для поиска ---
@@ -46,7 +46,7 @@ class App(ctk.CTk):
 
         self.search_entry = ctk.CTkEntry(
             search_frame,
-            placeholder_text="Введите запрос: τεχνολογία, интерфейс или название компонента...",
+            placeholder_text="Enter the interface or component name...",
             height=40,
             font=("Segoe UI", 14)
         )
@@ -55,7 +55,7 @@ class App(ctk.CTk):
 
         self.search_button = ctk.CTkButton(
             search_frame,
-            text="Найти",
+            text="Search",
             command=self._start_search_thread,
             height=40,
             font=("Segoe UI", 14, "bold")
@@ -71,13 +71,13 @@ class App(ctk.CTk):
         # Создаем прокручиваемый фрейм для списка результатов
         self.results_frame = ctk.CTkScrollableFrame(
             results_outer_frame,
-            label_text="Результаты",
+            label_text="Results",
             label_font=("Segoe UI", 12, "bold")
         )
         self.results_frame.grid(row=0, column=0, sticky="nsew")
 
         # --- Статус-бар ---
-        self.status_label = ctk.CTkLabel(self, text="Готов к работе.", anchor="w", font=("Segoe UI", 12))
+        self.status_label = ctk.CTkLabel(self, text="Ready to work.", anchor="w", font=("Segoe UI", 12))
         self.status_label.grid(row=2, column=0, padx=20, pady=(10, 10), sticky="ew")
 
     def _clear_results(self):
@@ -93,18 +93,18 @@ class App(ctk.CTk):
 
         query = self.search_entry.get()
         if not query:
-            self.status_label.configure(text="Введите поисковый запрос.")
+            self.status_label.configure(text="Enter a search term...")
             self.search_button.configure(state="normal")
             return
 
-        self.status_label.configure(text="Идет поиск...")
+        self.status_label.configure(text="Searching...")
         thread = threading.Thread(target=self._perform_search, args=(query,), daemon=True)
         thread.start()
 
     def _perform_search(self, query):
         """Основная логика поиска: сначала локально, потом в вебе."""
         # Поиск в локальной базе
-        self._safe_after(lambda: self.status_label.configure(text="Ищу в локальной базе..."))
+        self._safe_after(lambda: self.status_label.configure(text="Searching in local base..."))
         local_results = search_local_db(query, self.db)
         if local_results:
             self._safe_after(lambda: self._add_results_to_gui(local_results))
@@ -112,7 +112,7 @@ class App(ctk.CTk):
         existing_urls = {doc['url'] for doc in local_results}
 
         # Поиск в интернете
-        self._safe_after(lambda: self.status_label.configure(text="Дополняю результаты из интернета..."))
+        self._safe_after(lambda: self.status_label.configure(text="Adding results from the internet..."))
         web_search_generator = search_web_for_notes(query)
         web_results = []
         for web_doc in web_search_generator:
@@ -125,7 +125,7 @@ class App(ctk.CTk):
 
         # Завершение
         self._safe_after(
-            lambda: self.status_label.configure(text=f"Поиск завершен. Найдено {len(self.all_results)} результатов."))
+            lambda: self.status_label.configure(text=f"Search is finished. {len(self.all_results)} results found."))
         self._safe_after(lambda: self.search_button.configure(state="normal"))
 
     def _add_results_to_gui(self, results: list):
@@ -154,7 +154,7 @@ class App(ctk.CTk):
             # Заголовок (основной текст)
             title_label = ctk.CTkLabel(
                 card,
-                text=doc.get("title", "Нет заголовка"),
+                text=doc.get("title", "No title"),
                 font=("Segoe UI", 14),
                 anchor="w",
                 justify="left",
@@ -176,7 +176,7 @@ class App(ctk.CTk):
         url = doc_to_open.get('url')
         if not url: return
 
-        print(f"Открывается URL: {url}")
+        print(f"Opening the URL: {url}")
         open_url(url)
 
         # Если документ из веба, добавляем его в локальную базу
@@ -184,4 +184,4 @@ class App(ctk.CTk):
             query = self.search_entry.get()
             add_document_to_db(doc_to_open, query)
             self.db = load_db()  # Обновляем кэш базы данных
-            self.status_label.configure(text=f"Документ '{doc_to_open['title'][:40]}...' добавлен в базу.")
+            self.status_label.configure(text=f"Document '{doc_to_open['title'][:40]}...' was added to the base.")

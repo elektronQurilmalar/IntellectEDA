@@ -246,5 +246,20 @@
             "layout"
         ],
         "source": "Web (ti.com)"
+    },
+    {
+        "id": "SiLabs",
+        "title": "AN1342: RS9116 CC1 Board Layout Guidelines",
+        "url": "https://www.silabs.com/documents/login/application-notes/an1342-rs9116-cc1-board-layout-guidelines.pdf",
+        "keywords": [
+            "board",
+            "spi",
+            "cc1",
+            "guidelines",
+            "rs9116",
+            "an1342:",
+            "layout"
+        ],
+        "source": "Web (silabs.com)"
     }
 ]
